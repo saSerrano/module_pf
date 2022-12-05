@@ -1,0 +1,37 @@
+{
+    "Basic Module": "module_pf", 
+    "Brief Description": "This module can follow a person within an environment that has already been mapped with the homer_mapping package.", 
+    "Events": [
+        {
+            "Description": "Refers to the event of the robot finding somebody to follow.", 
+            "Event-params": [], 
+            "Name": "foundPerson"
+        },
+        {
+            "Description": "Refers to the event of the robot losing track of the person that was being followed.", 
+            "Event-params": [], 
+            "Name": "lostPerson"
+        }
+    ], 
+    "Functions": [
+        {
+            "Description": "This function will enable the robot to start following the first person within its range of view, if the followed person goes out of sight, the robot will stand-by and follow the next person that appears in its range of view.", 
+            "Exec-condition": "the environment must be already mapped", 
+            "Input-params": [], 
+            "Name": "followPeople", 
+            "Output-params": []
+        }, 
+        {
+            "Description": "This function will prevent the robot from following anybody. If this function is invoked while the robot is following somebody, it will stop and stay idle.", 
+            "Exec-condition": "", 
+            "Input-params": [], 
+            "Name": "stopFollowing", 
+            "Output-params": []
+        }
+    ], 
+    "Hardware Required": [
+        "mobile base with laser scanner", 
+        "rgbd-sensor on the robots head", 
+        "a head that can pan"
+    ]
+}

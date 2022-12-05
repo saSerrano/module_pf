@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<launch>
+	<group ns="module_pf">
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<!-- Common params -->
+
+		<param name="control_rotperm_topic" value="/module_pf/panhead/permission" type="str"/>
+		<param name="master_in_topic" value="/module_pf/events" type="str"/>
+		<param name="master_out_topic" value="/module_pf/commands" type="str"/>
+		<param name="track_output_topic" value="/module_pf/track_output" type="str"/>
+		<param name="debug" value="false" type="bool"/>
+		<param name="pose_topic" value="/pose" type="str"/>
+		<param name="panhead_output_topic" value="/module_pf/panhead/position" type="str"/>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<!-- Tracker node params -->
+
+		<param name="color_input_topic" value="/orbbec_torso_camera/rgb/image_raw" type="str"/>
+		<param name="depth_input_topic" value="/orbbec_torso_camera/depth_registered/image_raw" type="str"/>
+		<param name="segmentation_thresh" value="0.02" type="double"/>
+		<param name="track_dist_thresh" value="0.3" type="double"/>
+		<param name="significant_area" value="4000" type="int"/>
+		<param name="display_image_flag" value="false" type="bool"/>
+		<param name="overlap_thresh" value="0.8" type="double"/>
+		<param name="move_head" value="true" type="bool"/>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<!-- Path manager node params -->
+
+		<param name="poi_add_topic" value="/map_manager/add_POI" type="str"/>
+		<param name="nav_start_topic" value="/homer_navigation/start_navigation" type="str"/>
+		<param name="nav_stop_topic" value="/homer_navigation/stop_navigation" type="str"/>
+		<param name="poi_mod_topic" value="/map_manager/modify_POI" type="str"/>
+		<param name="poi_del_topic" value="/map_manager/delete_POI" type="str"/>
+		<param name="poi_separation_thresh" value="0.75" type="double"/><!-- in meters -->
+		<param name="poi_reached_thresh" value="0.3" type="double"/><!-- in meters -->
+		<param name="person_neig_range" value="1.0" type="double"/><!-- in meters -->
+		<param name="not_moving_range" value="0.15" type="double"/><!-- in meters -->
+		<param name="not_moving_period" value="3000" type="int"/><!-- in miliseconds -->
+		<param name="depthcam_link" value="orbbec_astra_head_cam_depth_frame" type="str"/>
+		<param name="person_link" value="followed_person" type="str"/>
+		<param name="publish_person_poi" value="false" type="bool"/>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<!-- Pan Head Controller node params -->
+
+		<param name="control_kp" value="1" type="double"/>
+		<param name="control_kd" value="0.9" type="double"/>
+		<param name="control_base_kp" value="0.4" type="double"/>
+		<param name="control_base_kd" value="0.3" type="double"/>
+		<param name="control_rate" value="30" type="int"/>
+		<param name="control_maxvel" value="1.4" type="double"/>
+		<param name="control_base_maxvel" value="0.6" type="double"/>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<!-- Nodes --> 
+
+		<node pkg="module_pf" type="module_pf_tracker_node" name="tracker" output="screen" respawn="false"/>
+		<node pkg="module_pf" type="module_pf_path_manager_node" name="path_manager" output="screen" respawn="false"/>
+		<node pkg="module_pf" type="module_pf_panhead_node" name="panhead" output="screen" respawn="false"/>
+		<node pkg="module_pf" type="BasicModule.py" name="module_pf" output="screen" respawn="false"/>
+	</group>
+</launch>
