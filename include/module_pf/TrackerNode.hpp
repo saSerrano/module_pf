@@ -87,7 +87,7 @@ class TrackerNode
 		vector<Scalar> colorTable_;
 
 		//Object in charge of performing multi-tracking basedd on the depth image
-		Tracker tracker_;
+		TrackerPF tracker_;
 
 		//Object in charge of detecting people within the color image
 		SSD ssd_;

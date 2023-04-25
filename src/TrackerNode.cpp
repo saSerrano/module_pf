@@ -90,7 +90,7 @@ followed_person_id_(-1)
 	panhead_pub_ = nh_.advertise<std_msgs::Float64>(panhead_output_topic,10);
 
 	//Inicialización de los objetos con las que se realiza el tracking
-	tracker_ = Tracker(st_,dt_,sa_);
+	tracker_ = TrackerPF(st_,dt_,sa_);
 	prev_object_ = vector<TrackedObject>();
 
 	//Inicialización del detector de personas

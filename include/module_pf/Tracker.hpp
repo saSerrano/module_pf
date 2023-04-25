@@ -1,5 +1,5 @@
 /**
- * \class Tracker
+ * \class TrackerPF
  * 
  * \brief This class is for modeling the tracking process, is specified by the threshold values that determine the segmentation of objects (st and sa), and their linking across images from different instants of time (dt).
  * 
@@ -27,10 +27,10 @@
 using namespace std;
 using namespace cv;
 
-#ifndef TRACKER
-#define TRACKER
+#ifndef TRACKERPF
+#define TRACKERPF
 
-class Tracker
+class TrackerPF
 {
 	private:
 
@@ -47,7 +47,7 @@ class Tracker
 		/**
 		 * \brief Default constructor.
 		*/
-		Tracker();
+		TrackerPF();
 
 		/**
 		 * \brief Overloaded constructor that initializes the tracker with a set of threshold values.
@@ -55,7 +55,7 @@ class Tracker
 		 * \param dt Threshold value for the tracking process, in which if the centroid of two TrackedObjects from different time instants are apart form a distance greater than dt, they cannot be the same object.
 		 * \param sa Threshold value for the segmentation process, which corresponds to the minimum amount of pixels an object has to have in ordr to be considered a TrackedObject.
 		*/
-		Tracker(float st, float dt, int sa);
+		TrackerPF(float st, float dt, int sa);
 
 		/**
 		 * \brief Method for segementing the independent objects within a scene.

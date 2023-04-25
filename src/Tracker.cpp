@@ -1,6 +1,6 @@
 #include <module_pf/Tracker.hpp>
 
-Tracker::Tracker()
+TrackerPF::TrackerPF()
 {
 	Segmentation_Threshold = 0.05;
 	Distance_Threshold_ = 0.3;
@@ -8,7 +8,7 @@ Tracker::Tracker()
 	idRecord = 0;
 }
 
-Tracker::Tracker(float st, float dt, int sa)
+TrackerPF::TrackerPF(float st, float dt, int sa)
 {
 	if(st >= 0 && dt >= 0 && sa >= 0)
 	{
@@ -26,7 +26,7 @@ Tracker::Tracker(float st, float dt, int sa)
 	idRecord = 0;
 }
 
-vector<TrackedObject> Tracker::extractObjects(Mat &img)
+vector<TrackedObject> TrackerPF::extractObjects(Mat &img)
 {
 	//Segmentacion de los objetos con un area de por lo menos 'significant_area'
 	Mat mask = Mat::zeros(img.rows+2,img.cols+2,CV_8UC1);
@@ -100,7 +100,7 @@ vector<TrackedObject> Tracker::extractObjects(Mat &img)
 	return currObj;
 }
 
-void Tracker::linkObjects(vector<TrackedObject> &currObj, vector<TrackedObject> &prevObj)
+void TrackerPF::linkObjects(vector<TrackedObject> &currObj, vector<TrackedObject> &prevObj)
 {
 	//Vincular los objetos con area significativa del instante actual
 	//con los del instante previo
@@ -205,12 +205,12 @@ void Tracker::linkObjects(vector<TrackedObject> &currObj, vector<TrackedObject> 
 	}
 }
 
-float Tracker::sThresh()
+float TrackerPF::sThresh()
 {
 	return Segmentation_Threshold;
 }
 
-float Tracker::dThresh()
+float TrackerPF::dThresh()
 {
 	return Distance_Threshold_;
 }
